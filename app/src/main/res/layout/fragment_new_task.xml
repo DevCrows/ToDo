@@ -19,22 +19,55 @@
             tools:text="Create new Task" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_title"
             style="@style/Content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_new_task_title"
-            app:placeholderText="Task Name">
+            app:layout_constraintTop_toBottomOf="@+id/tv_new_task_title">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_task_name"
+                android:id="@+id/ed_task_title"
                 style="@style/Content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white" />
+                android:hint="@string/app_name"
+                android:textColorHint="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_content"
+            style="@style/Content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="12dp"
+            android:translationZ="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_title">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_task_content"
+                style="@style/Content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/app_name"
+                android:textColorHint="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_save_task"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="Save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_content" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

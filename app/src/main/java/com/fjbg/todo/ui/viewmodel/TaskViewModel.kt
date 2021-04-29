@@ -1,12 +1,15 @@
 package com.fjbg.todo.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fjbg.todo.data.local.model.Task
 import com.fjbg.todo.data.repository.TaskRepositoryImp
+import com.fjbg.todo.utils.DEBUG_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,7 +25,10 @@ class TaskViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            repository.getTaskList().collectLatest { list ->
+            repository.getTaskList().collect { list ->
+
+                Log.d(DEBUG_TAG, "list: $list")
+
                 if (list != null) {
                     _uiState.value = TaskListState.Success(list)
                 }
@@ -30,9 +36,9 @@ class TaskViewModel @Inject constructor(
         }
     }
 
-    fun createNewTask(){
+    fun createNewTask(task: Task) {
         viewModelScope.launch {
-            repository.getTaskList()
+            repository.createNewTask(task)
         }
     }
 

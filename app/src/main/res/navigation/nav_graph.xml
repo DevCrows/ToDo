@@ -9,7 +9,12 @@
         android:id="@+id/HomeFragment"
         android:name="com.fjbg.todo.ui.home.HomeFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_HomeFragment_to_NewTaskFragment"
+            app:destination="@id/NewTaskFragment" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/NewTaskFragment"
