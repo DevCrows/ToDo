@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.fjbg.todo.ui.edit.NewTaskFragment"
+        android:name="com.fjbg.todo.ui.newtask.NewTaskFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_new_task">
 

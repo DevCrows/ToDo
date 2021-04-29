@@ -8,13 +8,9 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_title"
+        style="@style/TaskItemTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-thin"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:paddingBottom="4dp"
-        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,13 +20,9 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_content"
+        style="@style/TaskItemContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-thin"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:paddingBottom="4dp"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title"

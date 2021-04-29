@@ -1,3 +1,17 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!--Padding-->
+    <dimen name="padding_title_start">12dp</dimen>
+    <dimen name="padding_title_end">12dp</dimen>
+    <dimen name="padding_title_top">8dp</dimen>
+    <dimen name="padding_title_bottom">12dp</dimen>
+
+    <!--Font-->
+    <dimen name="font_size_title">32sp</dimen>
+    <dimen name="font_size_sub_title">24sp</dimen>
+    <dimen name="font_size_content">16sp</dimen>
+    <dimen name="font_size_item_task_title">16sp</dimen>
+    <dimen name="font_size_item_task_content">14sp</dimen>
+
 </resources>
