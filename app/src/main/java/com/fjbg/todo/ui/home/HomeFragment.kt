@@ -47,6 +47,10 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+
+        //binder.
+
     }
 
     private fun initAdapter(list: List<Task>) {

@@ -38,7 +38,11 @@
     </style>
 
     <style name="Content" parent="Font">
-        <item name="android:textSize">@dimen/font_size_title</item>
+        <item name="android:paddingStart">@dimen/padding_content_start</item>
+        <item name="android:paddingEnd">@dimen/padding_content_end</item>
+        <item name="android:paddingTop">@dimen/padding_content_top</item>
+        <item name="android:paddingBottom">@dimen/padding_content_bottom</item>
+        <item name="android:textSize">@dimen/font_size_content</item>
     </style>
 
     <style name="TaskItemTitle" parent="Font">

@@ -18,6 +18,24 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Create new Task" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_new_task_title"
+            app:placeholderText="Task Name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_task_name"
+                style="@style/Content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

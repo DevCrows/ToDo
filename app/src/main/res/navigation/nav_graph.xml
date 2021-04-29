@@ -9,23 +9,12 @@
         android:id="@+id/HomeFragment"
         android:name="com.fjbg.todo.ui.home.HomeFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_home">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/NewTaskFragment" />
-
-    </fragment>
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/NewTaskFragment"
         android:name="com.fjbg.todo.ui.newtask.NewTaskFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_new_task">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/HomeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_new_task" />
 
 </navigation>
