@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class TaskViewModel @Inject constructor(
     private val repository: TaskRepositoryImp
 ) : ViewModel() {
 
@@ -29,6 +29,13 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+
+    fun createNewTask(){
+        viewModelScope.launch {
+            repository.getTaskList()
+        }
+    }
+
 }
 
 sealed class TaskListState {

@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.fjbg.todo.data.local.model.Task
 import com.fjbg.todo.databinding.FragmentHomeBinding
 import com.fjbg.todo.ui.home.adapter.TaskListAdapter
-import com.fjbg.todo.ui.viewmodel.HomeViewModel
+import com.fjbg.todo.ui.viewmodel.TaskViewModel
 import com.fjbg.todo.ui.viewmodel.TaskListState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.collect
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: TaskViewModel by viewModels()
     lateinit var adapter: TaskListAdapter
 
     lateinit var binder: FragmentHomeBinding
@@ -47,6 +47,10 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+
+        //binder.
+
     }
 
     private fun initAdapter(list: List<Task>) {
