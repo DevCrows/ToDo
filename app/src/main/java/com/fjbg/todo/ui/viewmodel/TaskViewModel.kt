@@ -7,7 +7,7 @@ import com.fjbg.todo.data.repository.TaskRepositoryImp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,26 +16,24 @@ class TaskViewModel @Inject constructor(
     private val repository: TaskRepositoryImp
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(TaskListState.Success(emptyList()))
-
-    val uiState: StateFlow<TaskListState> = _uiState
+    private val _uiState = MutableStateFlow(listOf<Task>())
+    val uiState: StateFlow<List<Task>> = _uiState
 
     init {
         viewModelScope.launch {
-            repository.getTaskList().collectLatest { list ->
+            repository.getTaskList().collect { list ->
                 if (list != null) {
-                    _uiState.value = TaskListState.Success(list)
+                    _uiState.value = list
                 }
             }
         }
     }
 
-    fun createNewTask(){
+    fun createNewTask(task: Task) {
         viewModelScope.launch {
-            repository.getTaskList()
+            repository.createNewTask(task)
         }
     }
-
 }
 
 sealed class TaskListState {
