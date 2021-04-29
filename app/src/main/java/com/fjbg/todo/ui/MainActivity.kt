@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         navController = NavController(this)
         navController = findNavController(R.id.nav_host_fragment)
     }
+    
 
     override fun onClick(v: View?) {
         navController.navigate(R.id.NewTaskFragment)
