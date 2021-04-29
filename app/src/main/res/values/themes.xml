@@ -29,6 +29,7 @@
     </style>
 
     <style name="Title" parent="Font">
+        <item name="android:textColor">@color/title_text_color</item>
         <item name="android:paddingStart">@dimen/padding_title_start</item>
         <item name="android:paddingEnd">@dimen/padding_title_end</item>
         <item name="android:paddingTop">@dimen/padding_title_top</item>
@@ -41,10 +42,18 @@
     </style>
 
     <style name="TaskItemTitle" parent="Font">
+        <item name="android:paddingStart">@dimen/padding_item_title_start</item>
+        <item name="android:paddingEnd">@dimen/padding_item_title_end</item>
+        <item name="android:paddingTop">@dimen/padding_item_title_top</item>
+        <item name="android:paddingBottom">@dimen/padding_item_title_bottom</item>
         <item name="android:textSize">@dimen/font_size_item_task_title</item>
     </style>
 
     <style name="TaskItemContent" parent="Font">
+        <item name="android:paddingStart">@dimen/padding_item_content_start</item>
+        <item name="android:paddingEnd">@dimen/padding_item_content_end</item>
+        <item name="android:paddingTop">@dimen/padding_item_content_top</item>
+        <item name="android:paddingBottom">@dimen/padding_item_content_bottom</item>
         <item name="android:textSize">@dimen/font_size_item_task_content</item>
     </style>
 
