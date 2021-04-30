@@ -5,6 +5,7 @@ data class Task(
     val title: String,
     val content: String? = "",
     val isActive: Boolean = true,
+    val isImportant: Boolean = false,
     val dateCreated: Long? = null,
     val dateEdited: Long? = null,
     val dateCompleted: Long? = null,

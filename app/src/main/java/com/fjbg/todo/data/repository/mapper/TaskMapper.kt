@@ -13,6 +13,7 @@ fun modelToEntity(task: Task): TaskEntity = TaskEntity(
     dateCompleted = task.dateCompleted,
     dateDeleted = task.dateDeleted,
     isActive = task.isActive,
+    isImportant = task.isImportant,
 )
 
 fun entityToModel(entity: TaskEntity): Task = Task(
@@ -24,6 +25,7 @@ fun entityToModel(entity: TaskEntity): Task = Task(
     dateCompleted = entity.dateCompleted,
     dateDeleted = entity.dateDeleted,
     isActive = entity.isActive,
+    isImportant = entity.isImportant,
 )
 
 fun taskEntitiesToModels(entities: List<TaskEntity>): List<Task> {
