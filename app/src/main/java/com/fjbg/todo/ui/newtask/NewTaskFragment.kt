@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.fjbg.todo.data.local.model.Task
 import com.fjbg.todo.databinding.FragmentNewTaskBinding
 import com.fjbg.todo.ui.viewmodel.TaskViewModel
@@ -29,22 +28,19 @@ class NewTaskFragment : Fragment() {
     }
 
     private fun initUi() {
-
-        val taskTitle = binder.edTaskTitle.text.toString()
-        val taskContent = binder.edTaskContent.text.toString()
-
         binder.btnSaveTask.setOnClickListener {
-            lifecycleScope.launchWhenStarted {
-                viewModel.createNewTask(
-                    Task(
-                        id = 0,
-                        title = taskTitle,
-                        content = taskContent,
-                        isActive = true,
-                        dateCreated = System.currentTimeMillis(),
-                    )
-                )
-            }
+            saveTask()
         }
+    }
+
+    private fun saveTask() {
+        val task = Task(
+            id = 0,
+            title = binder.edTaskTitle.text.toString(),
+            content = binder.edTaskContent.text.toString(),
+            isActive = true,
+            dateCreated = System.currentTimeMillis(),
+        )
+        viewModel.createNewTask(task)
     }
 }
