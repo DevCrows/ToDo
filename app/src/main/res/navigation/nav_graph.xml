@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/HomeFragment"
         android:name="com.fjbg.todo.ui.home.HomeFragment"
-        android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_home">
+
         <action
             android:id="@+id/action_HomeFragment_to_NewTaskFragment"
             app:destination="@id/NewTaskFragment" />
@@ -19,7 +19,10 @@
     <fragment
         android:id="@+id/NewTaskFragment"
         android:name="com.fjbg.todo.ui.newtask.NewTaskFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_new_task" />
+        tools:layout="@layout/fragment_new_task">
+        <action
+            android:id="@+id/action_NewTaskFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
 
 </navigation>

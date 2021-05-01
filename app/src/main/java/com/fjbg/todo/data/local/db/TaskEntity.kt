@@ -10,6 +10,7 @@ class TaskEntity(
     val title: String,
     val content: String? = "",
     val isActive: Boolean = true,
+    val isImportant: Boolean = false,
     val dateCreated: Long?,
     val dateEdited: Long?,
     val dateCompleted: Long?,

@@ -2,10 +2,10 @@ package com.fjbg.todo.ui.home.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.fjbg.todo.data.local.model.Task
-import com.fjbg.todo.databinding.ItemTaskBinding
+import com.fjbg.todo.databinding.ItemImportatntTaskBinding
 
-class TaskListViewHolder(
-    private val binder: ItemTaskBinding
+class ImportantTaskListViewHolder(
+    private val binder: ItemImportatntTaskBinding
 ) : RecyclerView.ViewHolder(binder.root) {
 
     fun initData(task: Task) = with(binder) {

@@ -1,21 +1,20 @@
 package com.fjbg.todo.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
-import androidx.recyclerview.widget.GridLayoutManager
-import com.fjbg.todo.R
+import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.fjbg.todo.data.local.model.Task
 import com.fjbg.todo.databinding.FragmentHomeBinding
+import com.fjbg.todo.ui.home.adapter.ImportantTaskListAdapter
 import com.fjbg.todo.ui.home.adapter.TaskListAdapter
+import com.fjbg.todo.ui.home.adapter.TitleListAdapter
 import com.fjbg.todo.ui.viewmodel.TaskViewModel
-import com.fjbg.todo.utils.DEBUG_TAG
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -23,7 +22,14 @@ import kotlinx.coroutines.flow.collect
 class HomeFragment : Fragment() {
 
     private val viewModel: TaskViewModel by viewModels()
-    lateinit var adapter: TaskListAdapter
+
+    private lateinit var mainTitleAdapter: TitleListAdapter
+    private lateinit var titleListAdapter: TitleListAdapter
+    private lateinit var titleImportantListAdapter: TitleListAdapter
+    private lateinit var importantTaskListAdapter: ImportantTaskListAdapter
+    private lateinit var taskListAdapter: TaskListAdapter
+    private lateinit var footer: TitleListAdapter
+
     lateinit var binder: FragmentHomeBinding
 
     override fun onCreateView(
@@ -32,30 +38,51 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binder = FragmentHomeBinding.inflate(inflater, container, false)
-
-        binder.fabNewTask.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_HomeFragment_to_NewTaskFragment)
-        }
-
         initData()
-
         return binder.root
     }
 
     private fun initData() {
         lifecycleScope.launchWhenCreated {
             viewModel.uiState.collect { state ->
-                initAdapter(state)
+                initAdapters(state)
             }
         }
     }
 
-    private fun initAdapter(list: List<Task>) {
+    private fun initAdapters(list: List<Task>) {
+        binder.rvTaskList.layoutManager = LinearLayoutManager(context)
+        val importantTaskList = list.filter {
+            it.isImportant
+        }
 
-        Log.d(DEBUG_TAG, "list: $list")
-
-        adapter = TaskListAdapter(list)
-        binder.rvTaskList.layoutManager = GridLayoutManager(context, 2)
-        binder.rvTaskList.adapter = adapter
+        footer = TitleListAdapter("", true)
+        if (importantTaskList.isNotEmpty()) {
+            mainTitleAdapter = TitleListAdapter(title = "Home", isHome = true)
+            titleImportantListAdapter = TitleListAdapter(title = "Important", isHome = false)
+            importantTaskListAdapter = ImportantTaskListAdapter(importantTaskList)
+            titleListAdapter = TitleListAdapter(title = "Latest", isHome = false)
+            taskListAdapter = TaskListAdapter(list)
+            val concatAdapter = ConcatAdapter(
+                mainTitleAdapter,
+                titleImportantListAdapter,
+                importantTaskListAdapter,
+                titleListAdapter,
+                taskListAdapter,
+                footer,
+            )
+            binder.rvTaskList.adapter = concatAdapter
+        } else {
+            mainTitleAdapter = TitleListAdapter(title = "Home", isHome = true)
+            titleListAdapter = TitleListAdapter(title = "Latest", isHome = false)
+            taskListAdapter = TaskListAdapter(list)
+            val concatAdapter = ConcatAdapter(
+                mainTitleAdapter,
+                titleListAdapter,
+                taskListAdapter,
+                footer,
+            )
+            binder.rvTaskList.adapter = concatAdapter
+        }
     }
 }
