@@ -27,12 +27,13 @@ class TitleListAdapter(
         fun initData(title: String, isHome: Boolean) {
 
             if (isHome) {
+                binder.tvHome.text = title
                 binder.tvHome.visibility = View.VISIBLE
                 binder.tvListTitle.visibility = View.GONE
             } else {
                 binder.tvListTitle.text = title
-                binder.tvHome.visibility = View.GONE
                 binder.tvListTitle.visibility = View.VISIBLE
+                binder.tvHome.visibility = View.GONE
             }
         }
     }
