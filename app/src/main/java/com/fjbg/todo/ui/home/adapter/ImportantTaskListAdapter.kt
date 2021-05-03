@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.fjbg.todo.data.local.model.Task
-import com.fjbg.todo.databinding.ItemImportatntTaskBinding
+import com.fjbg.todo.databinding.ItemImportantTaskBinding
 
 class ImportantTaskListAdapter(
     private val taskList: List<Task>
 ) : RecyclerView.Adapter<ImportantTaskListViewHolder>() {
 
-    lateinit var binder: ItemImportatntTaskBinding
+    lateinit var binder: ItemImportantTaskBinding
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImportantTaskListViewHolder {
         binder =
-            ItemImportatntTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemImportantTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ImportantTaskListViewHolder(binder)
     }
 
