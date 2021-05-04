@@ -16,14 +16,16 @@ class TaskViewModel @Inject constructor(
     private val repository: TaskRepositoryImp
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(listOf<Task>())
-    val uiState: StateFlow<List<Task>> = _uiState
+    private val _taskList = MutableStateFlow(listOf<Task>())
+    val taskList: StateFlow<List<Task>> = _taskList
+
+    //private val _task = MutableStateFlow<Task>()
 
     init {
         viewModelScope.launch {
             repository.getTaskList().collect { list ->
                 if (list != null) {
-                    _uiState.value = list
+                    _taskList.value = list
                 }
             }
         }
@@ -34,9 +36,15 @@ class TaskViewModel @Inject constructor(
             repository.createNewTask(task)
         }
     }
-}
 
-sealed class TaskListState {
-    data class Success(val list: List<Task>) : TaskListState()
-    data class Error(val exception: Throwable) : TaskListState()
+    fun getTaskById(taskId: Int): Task? {
+        viewModelScope.launch {
+            repository.getTaskById(taskId).collect {
+                if (it != null) {
+                    //_task.value = it
+                }
+            }
+        }
+        return null
+    }
 }
