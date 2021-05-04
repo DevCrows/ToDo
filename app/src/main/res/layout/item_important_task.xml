@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/motionLayout"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:padding="8dp"
-        app:layoutDescription="@xml/item_important_task_scene">
+        app:layoutDescription="@xml/item_important_task_scene"
+        tools:showPaths="true">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"
             style="@style/CardViewTask"
-            android:layout_width="280dp"
-            android:layout_height="140dp"
-            android:layout_margin="8dp"
+            android:layout_width="260dp"
+            android:layout_height="match_parent"
+            android:layout_margin="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
