@@ -1,14 +1,10 @@
 package com.fjbg.todo.ui.home
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.fjbg.todo.R
+import com.fjbg.todo.base.BaseFragment
 import com.fjbg.todo.data.local.model.Task
 import com.fjbg.todo.databinding.FragmentHomeBinding
 import com.fjbg.todo.ui.home.adapter.ImportantTaskListAdapter
@@ -19,9 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
-
-    private val viewModel: TaskViewModel by viewModels()
+class HomeFragment : BaseFragment<FragmentHomeBinding, TaskViewModel>() {
 
     private lateinit var mainTitleAdapter: TitleListAdapter
     private lateinit var titleListAdapter: TitleListAdapter
@@ -30,28 +24,24 @@ class HomeFragment : Fragment() {
     private lateinit var taskListAdapter: TaskListAdapter
     private lateinit var footer: TitleListAdapter
 
-    lateinit var binder: FragmentHomeBinding
+    override fun initViewModel(): Class<TaskViewModel> = TaskViewModel::class.java
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binder = FragmentHomeBinding.inflate(inflater, container, false)
+    override fun initLayout(): Int = R.layout.fragment_home
+
+    override fun initFragment() {
         initData()
-        return binder.root
     }
 
     private fun initData() {
         lifecycleScope.launchWhenCreated {
-            viewModel.uiState.collect { state ->
-                initAdapters(state)
+            viewModel.taskList.collect { list ->
+                initAdapters(list)
             }
         }
     }
 
     private fun initAdapters(list: List<Task>) {
-        binder.rvTaskList.layoutManager = LinearLayoutManager(context)
+        binding.rvTaskList.layoutManager = LinearLayoutManager(context)
         val importantTaskList = list.filter {
             it.isImportant
         }
@@ -71,7 +61,7 @@ class HomeFragment : Fragment() {
                 taskListAdapter,
                 footer,
             )
-            binder.rvTaskList.adapter = concatAdapter
+            binding.rvTaskList.adapter = concatAdapter
         } else {
             mainTitleAdapter = TitleListAdapter(title = "Home", isHome = true)
             titleListAdapter = TitleListAdapter(title = "Latest", isHome = false)
@@ -82,7 +72,9 @@ class HomeFragment : Fragment() {
                 taskListAdapter,
                 footer,
             )
-            binder.rvTaskList.adapter = concatAdapter
+            binding.rvTaskList.adapter = concatAdapter
         }
     }
+
+
 }
