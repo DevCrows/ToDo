@@ -22,8 +22,16 @@ abstract class BaseFragment<T : ViewDataBinding, VM : ViewModel> : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, initLayout(), container, false)
         viewModel = ViewModelProvider(this).get(initViewModel())
+        initFragment()
         return binding.root
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.unbind()
+    }
+
+    abstract fun initFragment()
 
     abstract fun initViewModel(): Class<VM>
 

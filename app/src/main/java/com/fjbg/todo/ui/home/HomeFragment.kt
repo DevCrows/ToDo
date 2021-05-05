@@ -1,6 +1,5 @@
 package com.fjbg.todo.ui.home
 
-import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,8 +28,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, TaskViewModel>() {
 
     override fun initLayout(): Int = R.layout.fragment_home
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun initFragment() {
         initData()
     }
 
