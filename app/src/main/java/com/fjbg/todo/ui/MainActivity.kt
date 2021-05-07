@@ -21,19 +21,21 @@ class MainActivity : AppCompatActivity() {
         binder.bottomNavView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_home -> {
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.action_NewTaskFragment_to_HomeFragment)
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.HomeFragment)
                     true
                 }
                 R.id.action_new_task -> {
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.action_HomeFragment_to_NewTaskFragment)
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.NewTaskFragment)
                     true
                 }
                 else -> false
             }
         }
+        binder.bottomNavView.setOnNavigationItemReselectedListener {}
+    }
 
-        binder.bottomNavView.setOnNavigationItemReselectedListener {
-
-        }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }

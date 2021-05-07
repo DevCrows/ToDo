@@ -1,6 +1,9 @@
 package com.fjbg.todo.ui.home
 
+import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fjbg.todo.R
@@ -10,7 +13,9 @@ import com.fjbg.todo.databinding.FragmentHomeBinding
 import com.fjbg.todo.ui.home.adapter.ImportantTaskListAdapter
 import com.fjbg.todo.ui.home.adapter.TaskListAdapter
 import com.fjbg.todo.ui.home.adapter.TitleListAdapter
+import com.fjbg.todo.ui.taskdetail.TaskDetailFragment
 import com.fjbg.todo.ui.viewmodel.TaskViewModel
+import com.fjbg.todo.utils.DEBUG_TAG
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -32,13 +37,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, TaskViewModel>() {
         initData()
     }
 
-    private fun initData() {
+    private fun initData() =
         lifecycleScope.launchWhenCreated {
             viewModel.taskList.collect { list ->
                 initAdapters(list)
             }
         }
-    }
 
     private fun initAdapters(list: List<Task>) {
         binding.rvTaskList.layoutManager = LinearLayoutManager(context)
@@ -52,7 +56,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, TaskViewModel>() {
             titleImportantListAdapter = TitleListAdapter(title = "Important", isHome = false)
             importantTaskListAdapter = ImportantTaskListAdapter(importantTaskList)
             titleListAdapter = TitleListAdapter(title = "Latest", isHome = false)
-            taskListAdapter = TaskListAdapter(list)
+            taskListAdapter = TaskListAdapter(
+                taskList = list,
+                action = ::navigateToTask
+            )
             val concatAdapter = ConcatAdapter(
                 mainTitleAdapter,
                 titleImportantListAdapter,
@@ -65,7 +72,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, TaskViewModel>() {
         } else {
             mainTitleAdapter = TitleListAdapter(title = "Home", isHome = true)
             titleListAdapter = TitleListAdapter(title = "Latest", isHome = false)
-            taskListAdapter = TaskListAdapter(list)
+            taskListAdapter = TaskListAdapter(
+                taskList = list,
+                action = ::navigateToTask
+            )
             val concatAdapter = ConcatAdapter(
                 mainTitleAdapter,
                 titleListAdapter,
@@ -76,5 +86,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, TaskViewModel>() {
         }
     }
 
+    private fun navigateToTask(taskId: Int) {
+        Log.d(DEBUG_TAG, "taskId: $taskId")
 
+        val bundle = Bundle()
+        bundle.putInt("TASK_ID", taskId)
+        TaskDetailFragment().taskId()
+
+        activity?.findNavController(R.id.nav_host_fragment)?.navigate(R.id.TaskDetailFragment)
+    }
 }

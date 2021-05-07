@@ -14,4 +14,8 @@ class TaskDetailFragment : BaseFragment<FragmentTaskDetailBinding, TaskViewModel
     override fun initFragment() {
 
     }
+
+    companion object{
+
+    }
 }
