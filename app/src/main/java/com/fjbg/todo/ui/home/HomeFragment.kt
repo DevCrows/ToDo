@@ -1,6 +1,7 @@
 package com.fjbg.todo.ui.home
 
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fjbg.todo.R
@@ -32,13 +33,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, TaskViewModel>() {
         initData()
     }
 
-    private fun initData() {
+    private fun initData() =
         lifecycleScope.launchWhenCreated {
             viewModel.taskList.collect { list ->
                 initAdapters(list)
             }
         }
-    }
 
     private fun initAdapters(list: List<Task>) {
         binding.rvTaskList.layoutManager = LinearLayoutManager(context)
@@ -52,7 +52,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, TaskViewModel>() {
             titleImportantListAdapter = TitleListAdapter(title = "Important", isHome = false)
             importantTaskListAdapter = ImportantTaskListAdapter(importantTaskList)
             titleListAdapter = TitleListAdapter(title = "Latest", isHome = false)
-            taskListAdapter = TaskListAdapter(list)
+            taskListAdapter = TaskListAdapter(
+                taskList = list,
+                action = ::navigateToTask
+            )
             val concatAdapter = ConcatAdapter(
                 mainTitleAdapter,
                 titleImportantListAdapter,
@@ -65,7 +68,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, TaskViewModel>() {
         } else {
             mainTitleAdapter = TitleListAdapter(title = "Home", isHome = true)
             titleListAdapter = TitleListAdapter(title = "Latest", isHome = false)
-            taskListAdapter = TaskListAdapter(list)
+            taskListAdapter = TaskListAdapter(
+                taskList = list,
+                action = ::navigateToTask
+            )
             val concatAdapter = ConcatAdapter(
                 mainTitleAdapter,
                 titleListAdapter,
@@ -76,5 +82,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, TaskViewModel>() {
         }
     }
 
+    private fun navigateToTask(taskId: Int) {
+        findNavController().navigate(
+            HomeFragmentDirections.actionHomeFragmentToTaskDetailFragment(
+                taskId
+            )
+        )
 
+    }
 }

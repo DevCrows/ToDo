@@ -5,11 +5,15 @@ import com.fjbg.todo.data.local.model.Task
 import com.fjbg.todo.databinding.ItemTaskBinding
 
 class TaskListViewHolder(
-    private val binder: ItemTaskBinding
+    private val binder: ItemTaskBinding,
+    val onClick: (Int) -> Unit
 ) : RecyclerView.ViewHolder(binder.root) {
 
-    fun initData(task: Task) = with(binder) {
+    fun initData(task: Task): Unit = with(binder) {
         this.tvTitle.text = task.title
         this.tvContent.text = task.content
+        this.clTask.setOnClickListener {
+            onClick.invoke(task.id)
+        }
     }
 }
