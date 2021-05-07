@@ -19,7 +19,8 @@ class TaskViewModel @Inject constructor(
     private val _taskList = MutableStateFlow(listOf<Task>())
     val taskList: StateFlow<List<Task>> = _taskList
 
-    //private val _task = MutableStateFlow<Task>()
+    private val _getTask = MutableStateFlow<Task?>(null)
+    val getTask: StateFlow<Task?> = _getTask
 
     init {
         viewModelScope.launch {
@@ -37,14 +38,13 @@ class TaskViewModel @Inject constructor(
         }
     }
 
-    fun getTaskById(taskId: Int): Task? {
+    fun getTaskById(taskId: Int) {
         viewModelScope.launch {
             repository.getTaskById(taskId).collect {
                 if (it != null) {
-                    //_task.value = it
+                    _getTask.value = it
                 }
             }
         }
-        return null
     }
 }

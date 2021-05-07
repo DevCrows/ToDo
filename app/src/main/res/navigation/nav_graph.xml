@@ -9,7 +9,26 @@
         android:id="@+id/HomeFragment"
         android:name="com.fjbg.todo.ui.home.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_HomeFragment_to_NewTaskFragment"
+            app:destination="@id/NewTaskFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/HomeFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_TaskDetailFragment"
+            app:destination="@id/TaskDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/HomeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/NewTaskFragment"
@@ -21,6 +40,11 @@
         android:id="@+id/TaskDetailFragment"
         android:name="com.fjbg.todo.ui.taskdetail.TaskDetailFragment"
         android:label="Task Detail"
-        tools:layout="@layout/fragment_task_detail" />
+        tools:layout="@layout/fragment_task_detail">
+        <argument
+            android:name="taskId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

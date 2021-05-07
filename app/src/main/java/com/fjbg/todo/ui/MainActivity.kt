@@ -31,11 +31,5 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-        binder.bottomNavView.setOnNavigationItemReselectedListener {}
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
     }
 }
