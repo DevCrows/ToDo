@@ -17,7 +17,10 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:paddingTop="8dp">
+            android:paddingStart="8dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="8dp">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_title"
@@ -43,14 +46,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title"
-                tools:text="Prime number brain is the seed of intelligence two ghostly white
-                figures in coveralls and helmets are softly dancing Cambrian explosion ship
-                of the imagination permanence of the stars. The ash of stellar alchemy
-                vastness is bearable only through love bits of moving fluff Sea of Tranquility
-                rich in mystery rich in heavy atoms. Venture are creatures of the cosmos great
-                turbulent clouds invent the universe stirred by starlight tendrils of
-                gossamer clouds and billions upon billions upon billions upon billions
-                upon billions upon billions upon billions" />
+                tools:text="@string/dummy_long_text" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

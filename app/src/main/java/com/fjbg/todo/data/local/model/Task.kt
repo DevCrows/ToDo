@@ -11,3 +11,9 @@ data class Task(
     val dateCompleted: Long? = null,
     val dateDeleted: Long? = null,
 )
+
+data class Category(
+    val id: Int,
+    val name: String,
+    val color: String,
+)
