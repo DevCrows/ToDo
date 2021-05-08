@@ -8,7 +8,7 @@ import com.fjbg.todo.databinding.ItemCategoryBinding
 
 class CategoryAdapter(
     private val categories: List<Category>,
-    val action: (Int) -> Unit,
+    private val action: (Int) -> Unit,
 ) : RecyclerView.Adapter<CategoryViewHolder>() {
 
     lateinit var binding: ItemCategoryBinding
