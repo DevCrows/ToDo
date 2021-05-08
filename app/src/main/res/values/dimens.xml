@@ -4,7 +4,7 @@
     <!--Padding-->
     <dimen name="padding_title_start">12dp</dimen>
     <dimen name="padding_title_end">12dp</dimen>
-    <dimen name="padding_title_top">8dp</dimen>
+    <dimen name="padding_title_top">10dp</dimen>
     <dimen name="padding_title_bottom">12dp</dimen>
 
     <dimen name="padding_content_start">12dp</dimen>
@@ -19,7 +19,7 @@
 
     <dimen name="padding_item_content_start">12dp</dimen>
     <dimen name="padding_item_content_end">12dp</dimen>
-    <dimen name="padding_item_content_top">4dp</dimen>
+    <dimen name="padding_item_content_top">8dp</dimen>
     <dimen name="padding_item_content_bottom">8dp</dimen>
 
     <!--Font-->
