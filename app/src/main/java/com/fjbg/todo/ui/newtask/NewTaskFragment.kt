@@ -1,14 +1,25 @@
 package com.fjbg.todo.ui.newtask
 
+import android.util.Log
+import android.view.View
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.fjbg.todo.R
 import com.fjbg.todo.base.BaseFragment
+import com.fjbg.todo.data.local.model.Category
 import com.fjbg.todo.data.local.model.Task
 import com.fjbg.todo.databinding.FragmentNewTaskBinding
+import com.fjbg.todo.ui.newtask.category.CategoryAdapter
 import com.fjbg.todo.ui.viewmodel.TaskViewModel
+import com.fjbg.todo.utils.DEBUG_TAG
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class NewTaskFragment : BaseFragment<FragmentNewTaskBinding, TaskViewModel>() {
+
+    private lateinit var categoryAdapter: CategoryAdapter
 
     override fun initViewModel(): Class<TaskViewModel> = TaskViewModel::class.java
 
@@ -16,22 +27,58 @@ class NewTaskFragment : BaseFragment<FragmentNewTaskBinding, TaskViewModel>() {
 
     override fun initFragment() {
         initUi()
+        viewModel.getCategories()
+        lifecycleScope.launch {
+            viewModel.getCategories.collect { list ->
+                Log.d(DEBUG_TAG, "initFragment - list: $list")
+                list?.let {
+                    initCategoryAdapter(it)
+                }
+            }
+        }
     }
 
     private fun initUi() {
         binding.btnSaveTask.setOnClickListener {
             saveTask()
         }
+
+        binding.btnAddCategory.setOnClickListener {
+
+        }
+
+        binding.btnSaveCategory.setOnClickListener {
+            saveCategory()
+        }
     }
 
     private fun saveTask() {
         val task = Task(
             id = 0,
-            title = binding.edTaskTitle.text.toString(),
-            content = binding.edTaskContent.text.toString(),
+            title = binding.etTaskTitle.text.toString(),
+            content = binding.etTaskContent.text.toString(),
             isActive = true,
             dateCreated = System.currentTimeMillis(),
         )
-        viewModel.createNewTask(task)
+        viewModel.createTask(task)
+    }
+
+    private fun saveCategory() {
+        val category = Category(
+            id = 0,
+            name = binding.etCategory.text.toString(),
+            color = "00FF00"
+        )
+        viewModel.createCategory(category)
+    }
+
+    private fun initCategoryAdapter(categories: List<Category>) {
+        if (categories.isNullOrEmpty()) binding.rvCategories.visibility = View.VISIBLE
+        binding.rvCategories.layoutManager = LinearLayoutManager(context)
+        categoryAdapter = CategoryAdapter(categories, ::onSelectCategory)
+        binding.rvCategories.adapter = categoryAdapter
+    }
+
+    private fun onSelectCategory(categoryId: Int) {
     }
 }

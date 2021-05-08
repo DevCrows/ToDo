@@ -16,7 +16,7 @@ interface TaskDao {
     fun getTaskById(taskId: Int): Flow<TaskEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addTask(task: TaskEntity)
+    suspend fun createTask(task: TaskEntity)
 
     @Query("DELETE FROM task WHERE id=:taskId")
     suspend fun deleteTask(taskId: Int)
