@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fjbg.todo.data.local.model.Category
 import com.fjbg.todo.data.local.model.Task
-import com.fjbg.todo.data.repository.TaskRepositoryImp
+import com.fjbg.todo.data.repository.category.CategoryRepositoryImp
+import com.fjbg.todo.data.repository.task.TaskRepositoryImp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TaskViewModel @Inject constructor(
-    private val repository: TaskRepositoryImp,
+    private val taskRepository: TaskRepositoryImp,
+    private val categoryRepository: CategoryRepositoryImp,
 ) : ViewModel() {
 
     private val _taskList = MutableStateFlow(listOf<Task>())
@@ -28,7 +30,7 @@ class TaskViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            repository.getTaskList().collect { list ->
+            taskRepository.getTaskList().collect { list ->
                 list?.let {
                     _taskList.value = it
                 }
@@ -38,14 +40,14 @@ class TaskViewModel @Inject constructor(
 
     fun createTask(task: Task) {
         viewModelScope.launch {
-            repository.createTask(task)
+            taskRepository.createTask(task)
         }
     }
 
 
     fun getTaskById(taskId: Int) {
         viewModelScope.launch {
-            repository.getTaskById(taskId).collect {
+            taskRepository.getTaskById(taskId).collect {
                 if (it != null) {
                     _getTask.value = it
                 }
@@ -56,13 +58,13 @@ class TaskViewModel @Inject constructor(
     // Category
     fun addCategory(category: Category) {
         viewModelScope.launch {
-            repository.addCategory(category)
+            categoryRepository.addCategory(category)
         }
     }
 
     fun getCategories() {
         viewModelScope.launch {
-            repository.getCategories().collect { list ->
+            categoryRepository.getCategories().collect { list ->
                 list?.let {
                     _categoryList.value = it
                 }
@@ -72,7 +74,7 @@ class TaskViewModel @Inject constructor(
 
     fun deleteCategory(categoryId: Int) {
         viewModelScope.launch {
-            repository.deleteCategory(categoryId)
+            categoryRepository.deleteCategory(categoryId)
         }
     }
 }

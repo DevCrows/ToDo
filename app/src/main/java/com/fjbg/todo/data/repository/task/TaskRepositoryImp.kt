@@ -1,9 +1,10 @@
-package com.fjbg.todo.data.repository
+package com.fjbg.todo.data.repository.task
 
 import com.fjbg.todo.data.local.TaskDatabase
-import com.fjbg.todo.data.local.model.Category
 import com.fjbg.todo.data.local.model.Task
-import com.fjbg.todo.data.repository.mapper.*
+import com.fjbg.todo.data.repository.mapper.taskEntitiesToModels
+import com.fjbg.todo.data.repository.mapper.taskEntityToModel
+import com.fjbg.todo.data.repository.mapper.taskModelToEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -32,26 +33,9 @@ class TaskRepositoryImp @Inject constructor(
         }
     }
 
-
     override suspend fun editTask(taskId: Int) {
     }
 
     override suspend fun deleteTask(taskId: Int) {
-    }
-
-    override suspend fun getCategories(): Flow<List<Category>?> {
-        return database.categoryDao().getCategories().map { list ->
-            list?.let {
-                categoryEntitiesToModels(it)
-            }
-        }
-    }
-
-    override suspend fun addCategory(category: Category) {
-        database.categoryDao().addCategory(categoryModelToEntity(category))
-    }
-
-    override suspend fun deleteCategory(categoryId: Int) {
-        database.categoryDao().deleteCategory(categoryId)
     }
 }
