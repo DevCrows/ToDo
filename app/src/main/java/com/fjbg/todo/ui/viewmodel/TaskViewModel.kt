@@ -72,6 +72,14 @@ class TaskViewModel @Inject constructor(
         }
     }
 
+    fun getCategoryById(categoryId: Int): Category? {
+        var category: Category? = null
+        viewModelScope.launch {
+            category = categoryRepository.getCategoryById(categoryId)
+        }
+        return category
+    }
+
     fun deleteCategory(categoryId: Int) {
         viewModelScope.launch {
             categoryRepository.deleteCategory(categoryId)

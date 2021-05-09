@@ -15,5 +15,5 @@ data class TaskEntity(
     val dateEdited: Long?,
     val dateCompleted: Long?,
     val dateDeleted: Long?,
-    val categories: List<CategoryEntity>? = null,
+    val categories: List<CategoryEntity>?,
 )
