@@ -21,6 +21,7 @@ import kotlinx.coroutines.launch
 class NewTaskFragment : BaseFragment<FragmentNewTaskBinding, TaskViewModel>() {
 
     private lateinit var categoryAdapter: CategoryAdapter
+    private var categoriesSelected = arrayListOf<Category>()
 
     override fun initViewModel(): Class<TaskViewModel> = TaskViewModel::class.java
 
@@ -51,12 +52,18 @@ class NewTaskFragment : BaseFragment<FragmentNewTaskBinding, TaskViewModel>() {
     }
 
     private fun saveTask() {
+
+        categoriesSelected.forEach {
+            Log.d(DEBUG_TAG, "categoriesSelected: $categoriesSelected")
+        }
+
         val task = Task(
             id = 0,
             title = binding.etTaskTitle.text.toString(),
             content = binding.etTaskContent.text.toString(),
             isActive = true,
             dateCreated = System.currentTimeMillis(),
+            categories = categoriesSelected
         )
         viewModel.createTask(task)
     }
@@ -73,7 +80,13 @@ class NewTaskFragment : BaseFragment<FragmentNewTaskBinding, TaskViewModel>() {
     }
 
     private fun onSelectCategory(categoryId: Int) {
-
+        lifecycleScope.launchWhenResumed {
+            viewModel.getCategoryById(categoryId).let { category ->
+                category?.let {
+                    categoriesSelected.add(it)
+                }
+            }
+        }
     }
 
     private fun onLongPressedCategory(categoryId: Int) {

@@ -15,6 +15,7 @@ fun taskModelToEntity(task: Task): TaskEntity = TaskEntity(
     dateDeleted = task.dateDeleted,
     isActive = task.isActive,
     isImportant = task.isImportant,
+    categories = task.categories?.let(::categoriesModelsToEntities)
 )
 
 fun taskEntityToModel(entity: TaskEntity): Task = Task(
@@ -27,9 +28,11 @@ fun taskEntityToModel(entity: TaskEntity): Task = Task(
     dateDeleted = entity.dateDeleted,
     isActive = entity.isActive,
     isImportant = entity.isImportant,
+    categories = entity.categories?.let(::categoryEntitiesToModels)
 )
 
-fun taskEntitiesToModels(entities: List<TaskEntity>): List<Task> = entities.map(::taskEntityToModel)
+fun taskEntitiesToModels(entities: List<TaskEntity>): List<Task> =
+    entities.map(::taskEntityToModel)
 
 fun categoryEntityToModel(entity: CategoryEntity): Category = Category(
     id = entity.id,
@@ -45,3 +48,6 @@ fun categoryModelToEntity(category: Category): CategoryEntity = CategoryEntity(
 
 fun categoryEntitiesToModels(entities: List<CategoryEntity>): List<Category> =
     entities.map(::categoryEntityToModel)
+
+fun categoriesModelsToEntities(categories: List<Category>): List<CategoryEntity> =
+    categories.map(::categoryModelToEntity)
