@@ -2,17 +2,17 @@ package com.fjbg.todo.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.fjbg.todo.data.local.db.CategoryDao
-import com.fjbg.todo.data.local.db.CategoryEntity
-import com.fjbg.todo.data.local.db.TaskDao
-import com.fjbg.todo.data.local.db.TaskEntity
+import androidx.room.TypeConverters
+import com.fjbg.todo.data.local.db.*
 
 @Database(
     entities = [
         TaskEntity::class,
         CategoryEntity::class],
-    version = 1
+    version = 1,
+    exportSchema = false,
 )
+@TypeConverters(Converter::class)
 abstract class TaskDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao
     abstract fun categoryDao(): CategoryDao

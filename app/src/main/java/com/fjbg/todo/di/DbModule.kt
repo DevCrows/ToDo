@@ -3,6 +3,7 @@ package com.fjbg.todo.di
 import android.content.Context
 import androidx.room.Room
 import com.fjbg.todo.data.local.TaskDatabase
+import com.fjbg.todo.data.local.db.Converter
 import com.fjbg.todo.data.local.db.TaskDao
 import com.fjbg.todo.utils.DB_NAME
 import dagger.Module
@@ -21,7 +22,7 @@ class DbModule {
             applicationContext,
             TaskDatabase::class.java,
             DB_NAME
-        ).build()
+        ).addTypeConverter(Converter::class).build()
     }
 
     @Provides
