@@ -8,14 +8,15 @@ import com.fjbg.todo.databinding.ItemCategoryBinding
 
 class CategoryAdapter(
     private val categories: List<Category>,
-    private val action: (Int) -> Unit,
+    private val selectCategory: (Int) -> Unit,
+    private val deleteCategory: (Int) -> Unit,
 ) : RecyclerView.Adapter<CategoryViewHolder>() {
 
     lateinit var binding: ItemCategoryBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         binding = ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CategoryViewHolder(binding, action)
+        return CategoryViewHolder(binding, selectCategory, deleteCategory)
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int): Unit =

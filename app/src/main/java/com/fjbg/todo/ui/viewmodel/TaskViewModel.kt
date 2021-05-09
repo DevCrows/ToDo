@@ -42,11 +42,6 @@ class TaskViewModel @Inject constructor(
         }
     }
 
-    fun createCategory(category: Category) {
-        viewModelScope.launch {
-            repository.createCategory(category)
-        }
-    }
 
     fun getTaskById(taskId: Int) {
         viewModelScope.launch {
@@ -58,6 +53,13 @@ class TaskViewModel @Inject constructor(
         }
     }
 
+    // Category
+    fun addCategory(category: Category) {
+        viewModelScope.launch {
+            repository.addCategory(category)
+        }
+    }
+
     fun getCategories() {
         viewModelScope.launch {
             repository.getCategories().collect { list ->
@@ -65,6 +67,12 @@ class TaskViewModel @Inject constructor(
                     _categoryList.value = it
                 }
             }
+        }
+    }
+
+    fun deleteCategory(categoryId: Int) {
+        viewModelScope.launch {
+            repository.deleteCategory(categoryId)
         }
     }
 }

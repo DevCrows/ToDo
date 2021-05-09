@@ -10,6 +10,7 @@ import com.fjbg.todo.data.local.model.Category
 import com.fjbg.todo.data.local.model.Task
 import com.fjbg.todo.databinding.FragmentNewTaskBinding
 import com.fjbg.todo.ui.newtask.category.CategoryAdapter
+import com.fjbg.todo.ui.newtask.category.CategoryBottomSheet
 import com.fjbg.todo.ui.viewmodel.TaskViewModel
 import com.fjbg.todo.utils.DEBUG_TAG
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,11 +45,8 @@ class NewTaskFragment : BaseFragment<FragmentNewTaskBinding, TaskViewModel>() {
         }
 
         binding.btnAddCategory.setOnClickListener {
-
-        }
-
-        binding.btnSaveCategory.setOnClickListener {
-            saveCategory()
+            val categoryBottomSheet = CategoryBottomSheet(viewModel)
+            categoryBottomSheet.show(parentFragmentManager, "CategoryBottomSheet")
         }
     }
 
@@ -63,22 +61,24 @@ class NewTaskFragment : BaseFragment<FragmentNewTaskBinding, TaskViewModel>() {
         viewModel.createTask(task)
     }
 
-    private fun saveCategory() {
-        val category = Category(
-            id = 0,
-            name = binding.etCategory.text.toString(),
-            color = "00FF00"
-        )
-        viewModel.createCategory(category)
-    }
-
     private fun initCategoryAdapter(categories: List<Category>) {
         if (categories.isNullOrEmpty()) binding.rvCategories.visibility = View.VISIBLE
         binding.rvCategories.layoutManager = LinearLayoutManager(context)
-        categoryAdapter = CategoryAdapter(categories, ::onSelectCategory)
+        categoryAdapter = CategoryAdapter(
+            categories = categories,
+            selectCategory = ::onSelectCategory,
+            deleteCategory = ::onLongPressedCategory
+        )
         binding.rvCategories.adapter = categoryAdapter
     }
 
     private fun onSelectCategory(categoryId: Int) {
+
+    }
+
+    private fun onLongPressedCategory(categoryId: Int) {
+        lifecycleScope.launchWhenResumed {
+            viewModel.deleteCategory(categoryId)
+        }
     }
 }

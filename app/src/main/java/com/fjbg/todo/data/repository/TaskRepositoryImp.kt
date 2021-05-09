@@ -47,9 +47,11 @@ class TaskRepositoryImp @Inject constructor(
         }
     }
 
-    override suspend fun createCategory(category: Category) =
+    override suspend fun addCategory(category: Category) {
         database.categoryDao().addCategory(categoryModelToEntity(category))
+    }
 
     override suspend fun deleteCategory(categoryId: Int) {
+        database.categoryDao().deleteCategory(categoryId)
     }
 }

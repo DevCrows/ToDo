@@ -11,6 +11,6 @@ interface TaskRepository {
     suspend fun editTask(taskId: Int)
     suspend fun deleteTask(taskId: Int)
     suspend fun getCategories(): Flow<List<Category>?>
-    suspend fun createCategory(category: Category)
+    suspend fun addCategory(category: Category)
     suspend fun deleteCategory(categoryId: Int)
 }
