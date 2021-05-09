@@ -3,6 +3,7 @@ package com.fjbg.todo.di
 import android.content.Context
 import androidx.room.Room
 import com.fjbg.todo.data.local.TaskDatabase
+import com.fjbg.todo.data.local.db.CategoryDao
 import com.fjbg.todo.data.local.db.Converter
 import com.fjbg.todo.data.local.db.TaskDao
 import com.fjbg.todo.utils.DB_NAME
@@ -22,11 +23,15 @@ class DbModule {
             applicationContext,
             TaskDatabase::class.java,
             DB_NAME
-        ).addTypeConverter(Converter::class).build()
+        ).addTypeConverter(provideConverter()).build()
     }
 
     @Provides
-    fun provideTaskDao(taskDatabase: TaskDatabase): TaskDao {
-        return taskDatabase.taskDao()
-    }
+    fun provideConverter(): Converter = Converter()
+
+    @Provides
+    fun provideTaskDao(taskDatabase: TaskDatabase): TaskDao = taskDatabase.taskDao()
+
+    @Provides
+    fun provideCategoryDao(taskDatabase: TaskDatabase): CategoryDao = taskDatabase.categoryDao()
 }

@@ -10,6 +10,7 @@ data class Task(
     val dateEdited: Long? = null,
     val dateCompleted: Long? = null,
     val dateDeleted: Long? = null,
+    val category: Category? = null,
 )
 
 data class Category(
