@@ -56,10 +56,12 @@ class TaskViewModel @Inject constructor(
     }
 
     // Category
-    fun addCategory(category: Category) {
+    fun addCategory(category: Category): Boolean {
+        var result: Boolean = false
         viewModelScope.launch {
-            categoryRepository.addCategory(category)
+            result = categoryRepository.addCategory(category)
         }
+        return result
     }
 
     fun getCategories() {
