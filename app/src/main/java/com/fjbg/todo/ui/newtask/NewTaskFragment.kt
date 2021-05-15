@@ -52,11 +52,6 @@ class NewTaskFragment : BaseFragment<FragmentNewTaskBinding, TaskViewModel>() {
     }
 
     private fun saveTask() {
-
-        categoriesSelected.forEach {
-            Log.d(DEBUG_TAG, "categoriesSelected: $categoriesSelected")
-        }
-
         val task = Task(
             id = 0,
             title = binding.etTaskTitle.text.toString(),

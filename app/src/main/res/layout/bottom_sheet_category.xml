@@ -7,7 +7,6 @@
         style="?attr/bottomSheetStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/category_bottom_sheet_background"
         android:paddingBottom="56dp"
         app:behavior_hideable="true"
         app:behavior_peekHeight="auto"

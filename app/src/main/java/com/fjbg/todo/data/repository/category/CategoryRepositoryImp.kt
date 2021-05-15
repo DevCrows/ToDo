@@ -24,8 +24,8 @@ class CategoryRepositoryImp @Inject constructor(
         database.categoryDao().getCategoryById(categoryId)
     )
 
-    override suspend fun addCategory(category: Category) {
-        database.categoryDao().addCategory(categoryModelToEntity(category))
+    override suspend fun addCategory(category: Category): Boolean {
+        return database.categoryDao().addCategory(categoryModelToEntity(category)) != null
     }
 
     override suspend fun deleteCategory(categoryId: Int) {
