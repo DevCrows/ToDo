@@ -21,9 +21,8 @@ class TaskRepositoryImp @Inject constructor(
         }
     }
 
-    override suspend fun createTask(task: Task) =
+    override suspend fun createTask(task: Task): Unit =
         database.taskDao().createTask(taskModelToEntity(task))
-
 
     override suspend fun getTaskById(taskId: Int): Flow<Task?> {
         return database.taskDao().getTaskById(taskId).map { entity ->

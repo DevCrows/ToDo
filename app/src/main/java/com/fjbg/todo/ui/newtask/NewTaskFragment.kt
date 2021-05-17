@@ -61,6 +61,8 @@ class NewTaskFragment : BaseFragment<FragmentNewTaskBinding, TaskViewModel>() {
             categories = categoriesSelected
         )
         viewModel.createTask(task)
+        binding.etTaskTitle.text?.clear()
+        binding.etTaskContent.text?.clear()
     }
 
     private fun initCategoryAdapter(categories: List<Category>) {
