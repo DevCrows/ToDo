@@ -31,5 +31,7 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+        binder.bottomNavView.setOnNavigationItemReselectedListener { }
     }
+
 }

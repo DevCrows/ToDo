@@ -48,8 +48,8 @@ class CategoryBottomSheet(
 
     private fun saveCategory(category: Category) {
         lifecycleScope.launchWhenResumed {
-            val result = viewModel.addCategory(category)
-            if (result) binding.etCategory.text?.clear()
+            viewModel.addCategory(category)
+            binding.etCategory.text?.clear()
         }
     }
 }
