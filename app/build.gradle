@@ -82,6 +82,9 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
 
+    // Rive
+    implementation 'app.rive:rive-android:0.0.9'
+
     // Test
     testImplementation "androidx.room:room-testing:$room_version"
     testImplementation 'junit:junit:4.13.2'
